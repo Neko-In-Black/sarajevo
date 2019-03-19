@@ -1,0 +1,141 @@
+/* section contact */
+
+.contact {
+  &__desc {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  .container {
+    margin-bottom: 80px;
+  }
+  .row {
+    justify-content: space-between;
+  }
+}
+
+/* address styles */
+
+.addres {
+  .col(3);
+  .col-sm(12);
+  .media(@sm, {
+    text-align: center;
+  }
+  );
+  display: flex;
+  flex-direction: column;
+  &__heading {
+    font: 18px @openSans;
+    color: @heading;
+  }
+  &__desc {
+    max-width: 70%;
+    margin-left: 0;
+    font: 11px @openSans;
+    color: @pAdress;
+    .media(@sm, {
+      margin: 0 auto 20px;
+      max-width: 40%;
+      text-align: center;
+    }
+    );
+  }
+}
+
+/* form greed styles */
+
+.form {
+  .col(8);
+  .col-sm(12);
+  margin-bottom: 30px;
+  &__heading {
+    font: 700 20px @openSans;
+    color: @heading;
+  }
+}
+
+/* form styling */
+
+.contact {
+  &__form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  &__input {
+    width: 45%;
+    margin: 0;
+    .media(@sm, {
+      width: 100%;
+    }
+    )
+  }
+  &__textarea {
+    width: 100%;
+    resize: none;
+  }
+  &__textarea,
+  &__input {
+    padding: 10px;
+    margin-bottom: 30px;
+    border: 0;
+    border-bottom: 1px solid @iconBox;
+    &:focus,
+    &:active {
+      border-color: @blue;
+      box-shadow: 0 0 5px @blue;
+    }
+    &:placeholder-shown {
+      font: 400 12px @openSans;
+      color: @pAdress;
+    }
+  }
+  &__submit {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    &:hover .icon,
+    &:focus .icon {
+      opacity: 1;
+    }
+    .icon {
+      margin-right: 10px;
+    }
+  }
+}
+
+/* social icons */
+
+.social {
+  .col(1);
+  .col-md(6);
+  .flexList();
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  .media(@md, {
+    flex-direction: row;
+    text-align: center;
+    margin: auto;
+  }
+  );
+  li {
+    flex-grow: 1;
+    padding-left: 10px;
+    padding-right: 10px;
+    .media(@md, {
+      flex-grow: 0;
+    }
+    );
+  }
+}
+
+/* map styles */
+
+.map {
+  height: 300px;
+  overflow: hidden;
+}

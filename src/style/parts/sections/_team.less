@@ -1,0 +1,55 @@
+/* section team */
+
+.team {
+  &-desc {
+    .col(10);
+    text-align: center;
+    margin-bottom: 90px;
+  }
+}
+/* members greed */
+.members {
+  .col(12);
+  .flexList();
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+/* member styling */
+.member {
+  text-align: center;
+  &:not(:last-child) {
+    margin-right: 10px;
+    margin-bottom: 20px;
+  }
+  &:hover {
+    .member__name {
+      color: @phover;
+    }
+    .overlay {
+      transform: scale(1);
+      p,
+      span,
+      .icons {
+        opacity: 1;
+      }
+    }
+  }
+  &__photo {
+    position: relative;
+    overflow: hidden;
+    img {
+      display: block;
+    }
+  }
+  &__name {
+    margin-bottom: 5px;
+    font: 600 15px @openSans;
+    color: @heading;
+  }
+  &__job {
+    margin-top: 5px;
+    font: 600 12px @openSans;
+    color: @heading;
+    opacity: 0.3;
+  }
+}

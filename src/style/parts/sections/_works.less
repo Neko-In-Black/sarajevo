@@ -1,0 +1,96 @@
+/* section works */
+
+/* heading greed */
+
+.works {
+  .works-desc {
+    .col(10);
+    text-align: center;
+    margin-bottom: 26px;
+  }
+}
+
+/* !sorting greed and style! */
+
+.works-sorting {
+  .col-xs(12);
+  .col-md(10);
+  .col-lg(7);
+  .flexList();
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+
+  &__item {
+    //   flex-grow: 1;
+    margin-right: 8px;
+    text-align: center;
+
+    .media(@xs, {
+      margin-bottom: 8px;
+    }
+
+    );
+
+    button {
+      padding: 10px 20px;
+      border: 0;
+      outline: 0;
+      border-radius: 5px;
+      background: none;
+      color: @heading;
+      cursor: pointer;
+      font: 900 14px @mainFont;
+
+      &:hover,
+      &.active,
+      &:focus {
+        background-color: @blue;
+        color: @white;
+      }
+
+      &:active {
+        transform: translateY(2px);
+      }
+    }
+  }
+}
+
+/* potfolio styles and greed */
+
+.works-portfolio {
+  .flexList();
+  justify-content: center;
+  flex-wrap: wrap;
+
+  &__item {
+    position: relative;
+    min-width: 25%;
+    max-width: 25%;
+    overflow: hidden;
+    flex-grow: 1;
+
+    .media(600px, {
+      min-width: 50%;
+    }
+
+    );
+
+    &:hover {
+      .overlay {
+        transform: scale(1);
+
+        .overlay_heading,
+        a,
+        span {
+          opacity: 1;
+        }
+      }
+    }
+
+    img {
+      width: 100%;
+      display: block;
+    }
+  }
+}

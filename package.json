@@ -1,0 +1,47 @@
+{
+  "name": "sarajevo-packages",
+  "version": "1.4.0",
+  "description": "Sarajevo landing page to test webdef skills",
+  "main": "gulpfile.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Neko-In-Black/portfolio.git"
+  },
+  "scripts": {
+    "build": "gulp build",
+    "start": "gulp"
+  },
+  "author": {
+    "name": "Andrew",
+    "url": "https://github.com/Neko-In-Black/"
+  },
+  "license": "ISC",
+  "Dependencies": {},
+  "devDependencies": {
+    "autoprefixer": "9.5.0",
+    "browser-sync": "2.26.3",
+    "del": "4.0.0",
+    "group-css-media-queries": "1.4.1",
+    "gulp": "4.0.0",
+    "gulp-autoprefixer": "6.0.0",
+    "gulp-clean-css": "4.0.0",
+    "gulp-concat": "2.6.1",
+    "gulp-csso": "3.0.1",
+    "gulp-group-css-media-queries": "1.2.2",
+    "gulp-htmlmin": "5.0.1",
+    "gulp-imagemin": "5.0.3",
+    "gulp-include": "2.3.1",
+    "gulp-less": "4.0.1",
+    "gulp-plumber": "1.2.1",
+    "gulp-rename": "1.4.0",
+    "gulp-svgmin": "2.1.0",
+    "gulp-svgstore": "7.0.1",
+    "gulp-uglify": "3.0.1",
+    "gulp-watch": "5.0.0",
+    "gulp-webp": "3.0.0",
+    "path": "0.12.7"
+  }
+}
