@@ -1,6 +1,5 @@
 'use strict';
-const
-  /* Основные плагины */
+const /* Основные плагины */
   gulp = require('gulp'),
   plumber = require('gulp-plumber'),
   less = require('gulp-less'),
@@ -45,11 +44,7 @@ const path = {
     html: './src/*.html',
     htmlInclude: './src/html_partials',
     style: './src/style/main.+(less|scss)',
-    js: [
-      './src/js/jquery-3.3.1.min.js',
-      './src/js/wow.min.js',
-      './src/js/main.js'
-    ],
+    js: ['./src/js/jquery-3.3.1.min.js', './src/js/wow.min.js', './src/js/main.js'],
     webP: './src/img/main/*.*',
     imgWebPDest: './src/img/webP',
     css: './src/css/',
@@ -93,21 +88,27 @@ const htmlBuild = () => {
   return gulp
     .src(path.src.html)
     .pipe(plumber())
-    .pipe(include({
-      extensions: 'html',
-      includePaths: path.src.htmlInclude
-    }))
-    .pipe(htmlmin({
-      collapseWhitespace: true,
-      minifyCSS: true,
-      minifyJS: true,
-      minifyURLs: true,
-      removeComments: true
-    }))
+    .pipe(
+      include({
+        extensions: 'html',
+        includePaths: path.src.htmlInclude
+      })
+    )
+    .pipe(
+      htmlmin({
+        collapseWhitespace: true,
+        minifyCSS: true,
+        minifyJS: true,
+        minifyURLs: true,
+        removeComments: true
+      })
+    )
     .pipe(gulp.dest(path.build.html))
-    .pipe(reload({
-      stream: true
-    }));
+    .pipe(
+      reload({
+        stream: true
+      })
+    );
 };
 exports.htmlBuild = gulp.series(htmlBuild);
 /* end Сборка Html */
@@ -121,32 +122,80 @@ const styleBuild = () => {
     .pipe(plumber())
     .pipe(preproc())
     .pipe(gulp.dest(path.src.css))
-    .pipe(prefixer({
-      browsers: ['last 10 versions', '> 3%', 'ie 11']
-    }))
-    .pipe(cleanCss(
-    //   {
-    //   level: {
-    //     1: {
-    //       all: true,
-    //     },
-    //     2: {
-    //       all: true
-    //     }
-    //   }
-    // }
-    ))
+    .pipe(prefixer())
     .pipe(media())
+    .pipe(
+      cleanCss({
+        level: {
+          1: {
+            cleanupCharsets: true, // controls `@charset` moving to the front of a stylesheet; defaults to `true`
+            normalizeUrls: true, // controls URL normalization; defaults to `true`
+            optimizeBackground: true, // controls `background` property optimizations; defaults to `true`
+            optimizeBorderRadius: true, // controls `border-radius` property optimizations; defaults to `true`
+            optimizeFilter: true, // controls `filter` property optimizations; defaults to `true`
+            optimizeFont: true, // controls `font` property optimizations; defaults to `true`
+            optimizeFontWeight: true, // controls `font-weight` property optimizations; defaults to `true`
+            optimizeOutline: true, // controls `outline` property optimizations; defaults to `true`
+            removeEmpty: true, // controls removing empty rules and nested blocks; defaults to `true`
+            removeNegativePaddings: true, // controls removing negative paddings; defaults to `true`
+            removeQuotes: true, // controls removing quotes when unnecessary; defaults to `true`
+            removeWhitespace: true, // controls removing unused whitespace; defaults to `true`
+            replaceMultipleZeros: true, // contols removing redundant zeros; defaults to `true`
+            replaceTimeUnits: true, // controls replacing time units with shorter values; defaults to `true`
+            replaceZeroUnits: true, // controls replacing zero values with units; defaults to `true`
+            roundingPrecision: false, // rounds pixel values to `N` decimal places; `false` disables rounding; defaults to `false`
+            selectorsSortingMethod: 'standard', // denotes selector sorting method; can be `'natural'` or `'standard'`, `'none'`, or false (the last two since 4.1.0); defaults to `'standard'`
+            specialComments: 'all', // denotes a number of /*! ... */ comments preserved; defaults to `all`
+            tidyAtRules: true, // controls at-rules (e.g. `@charset`, `@import`) optimizing; defaults to `true`
+            tidyBlockScopes: true, // controls block scopes (e.g. `@media`) optimizing; defaults to `true`
+            tidySelectors: true, // controls selectors optimizing; defaults to `true`,
+            semicolonAfterLastProperty: false // controls removing trailing semicolons in rule; defaults to `false` - means remove
+          },
+          2: {
+            mergeAdjacentRules: true, // controls adjacent rules merging; defaults to true
+            mergeIntoShorthands: true, // controls merging properties into shorthands; defaults to true
+            mergeMedia: true, // controls `@media` merging; defaults to true
+            mergeNonAdjacentRules: true, // controls non-adjacent rule merging; defaults to true
+            mergeSemantically: false, // controls semantic merging; defaults to false
+            overrideProperties: true, // controls property overriding based on understandability; defaults to true
+            removeEmpty: true, // controls removing empty rules and nested blocks; defaults to `true`
+            reduceNonAdjacentRules: true, // controls non-adjacent rule reducing; defaults to true
+            removeDuplicateFontRules: true, // controls duplicate `@font-face` removing; defaults to true
+            removeDuplicateMediaBlocks: true, // controls duplicate `@media` removing; defaults to true
+            removeDuplicateRules: true, // controls duplicate rules removing; defaults to true
+            removeUnusedAtRules: false, // controls unused at rule removing; defaults to false (available since 4.1.0)
+            restructureRules: true // controls rule restructuring; defaults to false
+            // skipProperties: [] // controls which properties won't be optimized, defaults to `[]` which means all will be optimized (since 4.1.0)
+          }
+        }
+        //   {
+        //   level: {
+        //     1: {
+        //       all: true,
+        //     },
+        //     2: {
+        //       all: true
+        //     }
+        //   }
+        // }
+      })
+    )
     .pipe(cssmin())
-    .pipe(rename({
-      suffix: '.min'
-    }))
-    .pipe(gulp.dest(path.build.css, {
-      sourcemaps: '.'
-    }))
-    .pipe(reload({
-      stream: true
-    }));
+    .pipe(
+      rename({
+        suffix: '.min'
+      })
+    )
+    .pipe(
+      gulp.dest(path.build.css, {
+        sourcemaps: '.'
+      })
+    )
+    .pipe(
+      reload({
+        stream: true
+      })
+    );
 };
 exports.styleBuild = gulp.series(styleBuild);
 /* end Сборка CSS */
@@ -160,15 +209,21 @@ const jsBuild = () => {
     .pipe(plumber())
     .pipe(concat('all.js'))
     .pipe(jsmin())
-    .pipe(rename({
-      suffix: '.min'
-    }))
-    .pipe(gulp.dest(path.build.js, {
-      sourcemaps: '.'
-    }))
-    .pipe(reload({
-      stream: true
-    }));
+    .pipe(
+      rename({
+        suffix: '.min'
+      })
+    )
+    .pipe(
+      gulp.dest(path.build.js, {
+        sourcemaps: '.'
+      })
+    )
+    .pipe(
+      reload({
+        stream: true
+      })
+    );
 };
 exports.jsBuild = gulp.series(jsBuild);
 /* end Сборка JS */
@@ -177,33 +232,38 @@ exports.jsBuild = gulp.series(jsBuild);
 const imageBuild = () => {
   return gulp
     .src(path.src.img)
-    .pipe(imagemin([
-      imagemin.gifsicle({
-        interlaced: true,
-        optimizationLevel: 2
-      }),
-      imagemin.jpegtran({
-        progressive: true,
-      }),
-      imagemin.optipng({
-        optimizationLevel: 5,
-        bitDepthReduction: true,
-        paletteReduction: true
-      }),
-      imagemin.svgo({
-        plugins: [{
-            removeViewBox: true
-          },
-          {
-            cleanupIDs: false
-          }
-        ]
-      })
-    ]))
+    .pipe(
+      imagemin([
+        imagemin.gifsicle({
+          interlaced: true,
+          optimizationLevel: 2
+        }),
+        imagemin.jpegtran({
+          progressive: true
+        }),
+        imagemin.optipng({
+          optimizationLevel: 5,
+          bitDepthReduction: true,
+          paletteReduction: true
+        }),
+        imagemin.svgo({
+          plugins: [
+            {
+              removeViewBox: true
+            },
+            {
+              cleanupIDs: false
+            }
+          ]
+        })
+      ])
+    )
     .pipe(gulp.dest(path.build.img))
-    .pipe(reload({
-      stream: true
-    }));
+    .pipe(
+      reload({
+        stream: true
+      })
+    );
 };
 exports.imageBuild = gulp.series(imageBuild);
 /* end Сборка Изображений */
@@ -213,21 +273,27 @@ exports.imageBuild = gulp.series(imageBuild);
 const svgSpriteBuild = () => {
   return gulp
     .src(path.sprite.src)
-    .pipe(svgmin(function (file) {
-      var prefix = relpath.basename(file.relative, relpath.extname(file.relative));
-      return {
-        plugins: [{
-          cleanupIDs: {
-            prefix: prefix + '-',
-            removeViewBox: true,
-            minify: true
-          }
-        }]
-      };
-    }))
-    .pipe(rename({
-      prefix: 'sprite-'
-    }))
+    .pipe(
+      svgmin(function(file) {
+        var prefix = relpath.basename(file.relative, relpath.extname(file.relative));
+        return {
+          plugins: [
+            {
+              cleanupIDs: {
+                prefix: prefix + '-',
+                removeViewBox: true,
+                minify: true
+              }
+            }
+          ]
+        };
+      })
+    )
+    .pipe(
+      rename({
+        prefix: 'sprite-'
+      })
+    )
     .pipe(svgstore())
     .pipe(gulp.dest(path.sprite.dest));
 };
@@ -246,9 +312,7 @@ exports.webPBuild = gulp.series(webPBuild);
 
 /* Сборка Шрифтов */
 const fontBuild = () => {
-  return gulp
-    .src(path.src.font)
-    .pipe(gulp.dest(path.build.font));
+  return gulp.src(path.src.font).pipe(gulp.dest(path.build.font));
 };
 exports.fontBuild = gulp.series(fontBuild);
 /* end Сборка Шрифтов */
@@ -281,6 +345,9 @@ exports.server = gulp.series(server);
 /* Build & Default */
 exports.build = gulp.series(
   deleteBuild,
-  gulp.parallel(htmlBuild, styleBuild, jsBuild, fontBuild), svgSpriteBuild, imageBuild);
+  gulp.parallel(htmlBuild, styleBuild, jsBuild, fontBuild),
+  svgSpriteBuild,
+  imageBuild
+);
 
 exports.default = gulp.series(exports.build, gulp.parallel(server, watcher));
